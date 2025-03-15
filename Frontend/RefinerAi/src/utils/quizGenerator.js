@@ -17,14 +17,19 @@ export async function generateQuiz(analysisContent) {
     if (!analysisContent) {
         throw new Error("No analysis content provided");
     }
-
+    
     const prompt = `
-    You are an educational quiz creator. Based on the following code analysis blog content, create 5 multiple-choice questions.
-    The questions should test understanding of the key concepts, best practices, and improvements discussed in the analysis.
-
+    You are CodeEd Assistant, an educational code improvement tool designed specifically for 
+    React developers. Your goal is to analyze React code and provide helpful, educational feedback that helps developers improve their skills.
     Blog Content:
     ${analysisContent}
-
+    Based on the code analysis, generate 3 multiple-choice quiz questions that:
+    - Test understanding of the key React concepts identified in the analysis
+    - Include 4 possible answers per question (only one correct)
+    - Provide brief explanations for why each answer is correct/incorrect
+    - Range from basic understanding to application of concepts
+    - Are directly relevant to the improvement opportunities in their code
+    
     Create a quiz in the following JSON format:
     {
         "quizzes": [
@@ -42,17 +47,6 @@ export async function generateQuiz(analysisContent) {
         ]
     }
 
-    Requirements:
-    1. Questions should be directly related to the content in the analysis
-    2. Each question must have exactly 4 options
-    3. The correctAnswer must match exactly one of the options
-    4. Include questions about:
-       - Code quality points mentioned
-       - Best practices discussed
-       - Specific improvements suggested
-       - Performance considerations
-       - React concepts covered
-    5. Make sure questions test understanding, not just memory
     `;
 
     try {
